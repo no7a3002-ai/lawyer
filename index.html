@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>مكتب المحامي طه صالح</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --gold: #c69b41;
+      --black: #0b0b0b;
+      --white: #ffffff;
+      --muted: #9aa0a6;
+    }
+    *{box-sizing:border-box;margin:0;padding:0; transition: all 0.3s ease;}
+    body{font-family:'Cairo','Montserrat',sans-serif; background-color: var(--black); color: var(--white); line-height:1.6;}
+    a{text-decoration:none; color:inherit;}
+
+    /* Top bar */
+    .topbar{display:flex;justify-content:space-between;align-items:center;padding:15px 25px;border-bottom:1px solid rgba(255,255,255,0.1);position:sticky;top:0;background:rgba(0,0,0,0.6);backdrop-filter:blur(6px);z-index:50;}
+    .logo{font-weight:700;color:var(--gold);font-size:20px;}
+    .lang-switch button{background:none;border:1px solid var(--gold);color:var(--gold);margin-left:5px;padding:5px 10px;border-radius:5px;cursor:pointer;font-weight:600;transition:0.3s;}
+    .lang-switch button.active{background:var(--gold);color:var(--black);border-color:transparent;}
+    .lang-switch button:hover{background:var(--gold);color:var(--black);}
+
+    /* Sections */
+    section{padding:60px 20px; display:none; min-height:80vh; transition: background 1s ease;}
+    section.active{display:block;}
+    .hero{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:30px;}
+    .hero img{width:350px;border-radius:20px;box-shadow:0 0 25px var(--gold); transition: transform 0.3s;}
+    .hero img:hover{transform: scale(1.05);}
+    .hero-text{max-width:600px;}
+    .hero-text h1{color:var(--gold);font-size:36px;margin-bottom:15px;text-shadow: 1px 1px 5px rgba(0,0,0,0.5);}
+    .hero-text p{color:var(--muted);line-height:1.8;margin-bottom:20px;text-shadow: 1px 1px 3px rgba(0,0,0,0.3);}
+    .hero-text .btn{padding:12px 20px;margin-right:10px;border:none;border-radius:12px;font-weight:600;cursor:pointer;transition:0.3s;}
+    .btn-primary{background:var(--gold);color:var(--black);}
+    .btn-primary:hover{background: #e0b14a; transform: translateY(-3px);}
+    .btn-secondary{background:none;color:var(--white);border:1px solid var(--gold);}
+    .btn-secondary:hover{background: var(--gold);color:var(--black); transform: translateY(-3px);}
+
+    /* Services */
+    .services-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px;margin-top:25px;}
+    .service-card{background:rgba(255,255,255,0.05);padding:25px;border-radius:18px;box-shadow:0 8px 20px rgba(0,0,0,0.6);transition: transform 0.3s, box-shadow 0.3s;}
+    .service-card:hover{transform:translateY(-7px);box-shadow:0 12px 25px rgba(0,0,0,0.8);}
+
+    /* Contact */
+    .contact .socials{display:flex;gap:15px;margin-top:15px;}
+    .socials a{display:inline-flex;align-items:center;justify-content:center;width:50px;height:50px;border-radius:12px;background:rgba(255,255,255,0.05);color:var(--gold);font-weight:bold;font-size:16px;transition:0.3s;}
+    .socials a:hover{background:var(--gold);color:var(--black); transform: scale(1.1);}
+    .contact p{margin:6px 0;color:var(--muted);}
+
+    /* Footer */
+    footer{text-align:center;margin-top:50px;color:var(--muted);font-size:14px;}
+
+    /* Background gradient animation */
+    #about{background: linear-gradient(-45deg, #0b0b0b, #1a1a1a, #0b0b0b, #1a1a1a); background-size: 400% 400%; animation: gradientBG 15s ease infinite;}
+    #services{background: linear-gradient(-45deg, #0b0b0b, #111111, #0b0b0b, #111111); background-size: 400% 400%; animation: gradientBG 15s ease infinite;}
+    #contact{background: linear-gradient(-45deg, #0b0b0b, #222222, #0b0b0b, #222222); background-size: 400% 400%; animation: gradientBG 15s ease infinite;}
+
+    @keyframes gradientBG{
+      0%{background-position:0% 50%;}
+      50%{background-position:100% 50%;}
+      100%{background-position:0% 50%;}
+    }
+
+    /* Responsive */
+    @media(max-width:880px){.hero{flex-direction:column;}.hero img{width:80%;}}
+  </style>
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="logo">TS</div>
+    <div class="lang-switch">
+      <button class="active" data-lang="ar">AR</button>
+      <button data-lang="en">EN</button>
+      <button data-lang="tr">TR</button>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section id="about" class="active">
+    <div class="hero">
+      <img src="https://images.unsplash.com/photo-1603386329225-868f9c9e1b3b?auto=format&fit=crop&w=1200&q=80" alt="Scales of Justice">
+      <div class="hero-text">
+        <h1 id="about-title">من نحن</h1>
+        <p id="about-text">أنا المحامي طه صالح — خبرة في القانون المدني والجنائي والتجاري. أقدّم استشارات وتمثيل قانوني مخصص.</p>
+        <button id="btn-services" class="btn btn-primary" onclick="showSection('services')">الخدمات</button>
+        <button id="btn-contact" class="btn btn-secondary" onclick="showSection('contact')">تواصل</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <h1 id="services-title">الخدمات</h1>
+    <div class="services-list" id="services-list">
+      <div class="service-card">الاستشارات القانونية العامة</div>
+      <div class="service-card">التمثيل أمام المحاكم</div>
+      <div class="service-card">صياغة العقود والاتفاقيات</div>
+      <div class="service-card">حل النزاعات والتحكيم</div>
+    </div>
+    <button class="btn btn-secondary" onclick="showSection('about')" id="btn-back-services">العودة</button>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <h1 id="contact-title">تواصل</h1>
+    <p id="contact-address">📍 العنوان: حلب - سوريا</p>
+    <p id="contact-phone">📞 الهاتف: +963962123548</p>
+    <p id="contact-email">📧 البريد: taha.lawyer@example.com</p>
+    <div class="socials">
+      <a href="https://wa.me/963962123548" target="_blank">WA</a>
+      <a href="https://www.facebook.com/smjd65?mibextid=ZbWKwL" target="_blank">FB</a>
+      <a href="https://www.instagram.com/smjd65?igsh=ajFxbGg2bjhrNHNp" target="_blank">IG</a>
+      <a href="https://telegram.org/dl" target="_blank">TG</a>
+    </div>
+    <button class="btn btn-secondary" onclick="showSection('about')" id="btn-back-contact">العودة</button>
+  </section>
+
+  <footer id="footer-text">© 2025 مكتب المحامي طه صالح — جميع الحقوق محفوظة</footer>
+
+  <script>
+    function showSection(id){
+      document.querySelectorAll('section').forEach(sec=>sec.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      window.scrollTo({top:0, behavior:'smooth'});
+    }
+
+    const translations = {
+      ar:{
+        aboutTitle:"من نحن",
+        aboutText:"أنا المحامي طه صالح — خبرة في القانون المدني والجنائي والتجاري. أقدّم استشارات وتمثيل قانوني مخصص.",
+        servicesTitle:"الخدمات",
+        servicesList:["الاستشارات القانونية العامة","التمثيل أمام المحاكم","صياغة العقود والاتفاقيات","حل النزاعات والتحكيم"],
+        contactTitle:"تواصل",
+        contactAddress:"📍 العنوان: حلب - سوريا",
+        contactPhone:"📞 الهاتف: +963962123548",
+        contactEmail:"📧 البريد: taha.lawyer@example.com",
+        btnServices:"الخدمات",
+        btnContact:"تواصل",
+        btnBack:"العودة",
+        footer:"© 2025 مكتب المحامي طه صالح — جميع الحقوق محفوظة"
+      },
+      en:{
+        aboutTitle:"About",
+        aboutText:"I am Attorney Taha Salih — experienced in civil, criminal and commercial law. I provide tailored legal consultation and representation.",
+        servicesTitle:"Services",
+        servicesList:["General Legal Consultation","Court Representation","Contract Drafting","Dispute Resolution & Arbitration"],
+        contactTitle:"Contact",
+        contactAddress:"📍 Address: Aleppo, Syria",
+        contactPhone:"📞 Phone: +963962123548",
+        contactEmail:"📧 Email: taha.lawyer@example.com",
+        btnServices:"Services",
+        btnContact:"Contact",
+        btnBack:"Back",
+        footer:"© 2025 Attorney Taha Salih — All rights reserved"
+      },
+      tr:{
+        aboutTitle:"Hakkımızda",
+        aboutText:"Ben Avukat Taha Salih — medeni, ceza ve ticaret hukuku alanında deneyimliyim. Müvekkiller için özel hukuki danışmanlık ve temsil sunarım.",
+        servicesTitle:"Hizmetler",
+        servicesList:["Genel Hukuki Danışmanlık","Mahkeme Temsili","Sözleşme Hazırlama","Uyuşmazlık Çözümü & Tahkim"],
+        contactTitle:"İletişim",
+        contactAddress:"📍 Adres: Halep, Suriye",
+        contactPhone:"📞 Telefon: +963962123548",
+        contactEmail:"📧 E-posta: taha.lawyer@example.com",
+        btnServices:"Hizmetler",
+        btnContact:"İletişim",
+        btnBack:"Geri",
+        footer:"© 2025 Avukat Taha Salih — Tüm hakları saklıdır"
+      }
+    };
+
+    document.querySelectorAll('.lang-switch button').forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        const lang = btn.dataset.lang;
+        document.querySelectorAll('.lang-switch button').forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active');
+        document.documentElement.setAttribute('dir', lang==='ar'?'rtl':'ltr');
+        const t = translations[lang];
+
+        // About
+        document.getElementById('about-title').textContent = t.aboutTitle;
+        document.getElementById('about-text').textContent = t.aboutText;
+        document.getElementById('btn-services').textContent = t.btnServices;
+        document.getElementById('btn-contact').textContent = t.btnContact;
+
+        // Services
+        document.getElementById('services-title').textContent = t.servicesTitle;
+        const list = document.getElementById('services-list');
+        list.innerHTML = "";
+        t.servicesList.forEach(item=>{
+          const div = document.createElement('div');
+          div.className = 'service-card';
+          div.textContent = item;
+          list.appendChild(div);
+        });
+        document.getElementById('btn-back-services').textContent = t.btnBack;
+
+        // Contact
+        document.getElementById('contact-title').textContent = t.contactTitle;
+        document.getElementById('contact-address').textContent = t.contactAddress;
+        document.getElementById('contact-phone').textContent = t.contactPhone;
+        document.getElementById('contact-email').textContent = t.contactEmail;
+        document.getElementById('btn-back-contact').textContent = t.btnBack;
+
+        // Footer
+        document.getElementById('footer-text').textContent = t.footer;
+      });
+    });
+  </script>
+</body>
+</html>
